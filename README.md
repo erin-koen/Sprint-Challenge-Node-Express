@@ -1,16 +1,3 @@
-Request	Endpoint	Required	Returns
-get	api/projects		[ { id: number, name: string, description: string completed: boolean } ]
-get	api/projects/:id	correct id in url	{ id: number, name: string, description: string completed: boolean }
-get	api/projects/:id/actions	correct id in URL	[ { id: number, project_id: number, description: string, notes: string, completed: boolean } ]
-post	api/projects	{ name: string description: string }	{ id: number, name: string, description: string completed: boolean }
-put	api/projects/:id	correct id in url one or both of { name: string description: string }	{ id: number, name: string, description: string completed: boolean }
-delete	api/projects/:id	correct id in url	“Project ${id} has been deleted"
-get	api/actions		[ { id: number, project_id: number, description: string, notes: string. completed: boolean } ]
-get	api/actions/:id	correct id in url	{ id: number, project_id: number, description: string, notes: string. completed: boolean }
-post	api/actions	{ project_id: number, description: string, notes: string,	{ id: number, project_id: number, description: string, notes: string. completed: boolean }
-put	api/actions/:id	valid id in url an object with any of the following: { project_id: number description: string notes: string }	{ id: number, project_id: number, description: string, notes: string. completed: boolean }
-delete	api/actions/:id	valid ID in url	“The action was deleted successfully"
-
 # Sprint Challenge: Express and Node.js - Projects & Actions
 
 This challenge allows you to practice the concepts and techniques learned over the past Sprint and apply them in a concrete project. This Sprint explored Building RESTful Web APIs with Express and Node.js, Server-side Routing, Express Middleware & Deployment and Good Practices. In your challenge for this Sprint, you will demonstrate proficiency by creating an Web API using Node.js and Express.
