@@ -50,23 +50,46 @@ router.put("/:id", async (req, res) => {
     try {
       const test = await Actions.get(id);
       if (test) {
-        const udpatedAction = await Actions.update(id, req.body);
-        res.status(200).json(udpatedAction);
+        try {
+          const udpatedAction = await Actions.update(id, req.body);
+          res.status(200).json(udpatedAction);
+        } catch (err) {
+          res.status(500).send("The action could not be updated.");
+        }
       } else {
-        res.status(404).send("An action with that ID does not exist.");
+        res.status(404).send("An action with that ID does not exist");
       }
-    } catch {
-        res.status(500).send('The action could not be updated.')
+    } catch (err) {
+      res.status(404).send("An action with that ID does not exist");
     }
-  } res
-  .status(400)
-  .send("An action update requires a valid project_id, description, or notes.");
+  } else {
+    res
+      .status(400)
+      .send(
+        "An action update requires a valid project_id, description, or notes."
+      );
+  }
 });
 
 // Delete an action
 router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
   try {
-  } catch {}
+    const test = await Actions.get(id);
+    if (test) {
+      try {
+        await Actions.remove(id);
+        res.status(200).send('The action was deleted successfully');
+      } catch (err) {
+        res.status(500).send("The action could not be updated.");
+      }
+    } else {
+      res.status(404).send("An action with that ID does not exist");
+    }
+  } catch (err) {
+    res.status(404).send("An action with that ID does not exist");
+  }
 });
 
 module.exports = router;
