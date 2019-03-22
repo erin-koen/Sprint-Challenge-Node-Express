@@ -1,5 +1,6 @@
 const express = require("express");
 const Actions = require("../helpers/actionModel.js");
+const Projects = require("../helpers/projectModel.js");
 
 const router = express.Router();
 
@@ -31,10 +32,17 @@ router.post("/", async (req, res) => {
   const { project_id, description, notes } = req.body;
   if (project_id && description && notes) {
     try {
-      const newAction = await Actions.insert(req.body);
-      res.status(200).json(newAction);
+      const projectExists = await Projects.get(project_id);
+      if (projectExists) {
+        try {
+          const newAction = await Actions.insert(req.body);
+          res.status(200).json(newAction);
+        } catch (err) {
+          res.status(500).console.log("The action was not able to be created");
+        }
+      }
     } catch (err) {
-      res.status(500).console.log("The action was not able to be created");
+      res.status(404).send("No such project exists, go make a project first.");
     }
   }
   res
@@ -80,7 +88,7 @@ router.delete("/:id", async (req, res) => {
     if (test) {
       try {
         await Actions.remove(id);
-        res.status(200).send('The action was deleted successfully');
+        res.status(200).send("The action was deleted successfully");
       } catch (err) {
         res.status(500).send("The action could not be updated.");
       }
