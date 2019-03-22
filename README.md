@@ -26,13 +26,29 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+1) Routing - allows selection of a handler function based on the url to which the call is made.
+2) Middleware - Functions that receive requests (and responses, I believe), operate on them, and either send them along to the next piece of middleware in the stack or return the response to the user. So yeah, they handle responses too. Routes are middleware.
+
 - [ ] Describe Middleware?
+
+Ah. Above. 
 
 - [ ] Describe a Resource?
 
+Within the REST framework, everything is a resource. I think in this context, 'resource' is probably referring to either an entry of information in a database or a method written in a helper to access that database. When building an API, we've used http CRUD operations to access and modify those resources. 
+
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+The API can return HTTP status codes between 200 and 299 to indicate a successful request. 
+
 - [ ] How can we partition our application into sub-applications?
+
+Express Routers allow us to partition apps by endpoints. I.e. in this challenge we'll be able to bucket out Projects and Actions.
+
+
+
+
 
 ## Project Setup
 
